@@ -1,1 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
+@use "tailwindcss";
+@use "primeicons/primeicons.css";
+@plugin "daisyui";
+
+$cor-primaria: #F7921C;
+$cor-secundaria: #6C3F16;
+$cor-neutra: #52525B;
+
+@plugin "daisyui/theme" {
+  name: "vetclinic";
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
+
+  --color-primary: #F7921C;
+  --color-primary-content: #FFFFFF;
+  --color-secondary: #6C3F16;
+  --color-secondary-content: #FFFFFF;
+  --color-neutral: #52525B;
+  --color-neutral-content: #FFFFFF;
+}
