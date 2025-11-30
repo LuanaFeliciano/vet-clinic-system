@@ -1,17 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
-import { MenubarModule } from 'primeng/menubar';
-import { MenuItem } from 'primeng/api';
-import { ButtonModule } from 'primeng/button';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-landing',
-  imports: [MenubarModule, ButtonModule, RouterLink],
+  imports: [],
   templateUrl: './landing.html',
   styleUrl: './landing.scss',
 })
 export class Landing implements OnInit {
-  items: MenuItem[] | undefined;
 
   constructor(private router: Router) {
 
@@ -20,10 +16,6 @@ export class Landing implements OnInit {
   
 
   ngOnInit() {
-    this.items = [
-    { label: 'Home', routerLink: '/home' },
-    { label: 'Serviços', routerLink: '/servicos' },
-    { label: 'Sobre Nós', routerLink: '/sobre' }
-  ];
+
   }
 }

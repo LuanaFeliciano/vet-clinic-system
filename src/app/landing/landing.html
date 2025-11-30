@@ -1,78 +1,90 @@
-<div class="navbar bg-base-100 shadow-sm">
+<div class="navbar glass-effect fixed top-0 w-full z-50 h-20 px-4 lg:px-20 transition-all duration-300">
   <div class="navbar-start">
     <div class="dropdown">
-      <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <div tabindex="0" role="button" class="btn btn-ghost lg:hidden text-secondary">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
         </svg>
       </div>
     </div>
-    <a class="btn btn-ghost text-xl text-secondary">VetClinic+</a>
+    <a class="text-2xl font-display font-bold text-secondary tracking-tight">VetClinic<span class="text-primary">+</span></a>
   </div>
   <div class="navbar-center hidden lg:flex text-secondary">
-    <ul class="menu menu-horizontal px-1 text-base">
-      <li><a>Home</a></li>
-      <li><a>Serviços</a></li>
-      <li><a>Sobre Nós</a></li>
+    <ul class="menu menu-horizontal px-1 text-base font-medium">
+      <li><a class="hover:text-primary transition-colors" href="#home">Home</a></li>
+      <li><a class="hover:text-primary transition-colors" href="#servicos">Serviços</a></li>
+      <li><a class="hover:text-primary transition-colors" href="#sobre">Sobre Nós</a></li>
     </ul>
   </div>
   <div class="navbar-end">
-    <a class="btn btn-primary">Acessar</a>
+    <a class="btn btn-primary text-white font-bold rounded-full px-8 shadow-lg shadow-orange-200 hover:shadow-orange-300 transition-all">Acessar</a>
   </div>
 </div>
 
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-1 px-8 items-center lg:px-25 py-20">
-  <!-- Texto Principal -->
-  <div class="space-y-6 text-center lg:text-left">
-    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-      <span class="text-secondary">Cuidar de</span>
-      <span class="text-primary"> Animais</span><br>
-      <span class="text-secondary">Ficou Mais Fácil</span>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 px-8 items-center lg:px-20 pt-32 pb-20 bg-gradient-to-b from-white to-orange-50/30">
+  <div id="home" class="space-y-8 text-center lg:text-left animate-fade-in-up">
+    <div class="inline-block px-4 py-1.5 bg-orange-100 text-primary font-semibold text-sm rounded-full mb-2">
+      O sistema nº 1 para veterinários
+    </div>
+    
+    <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight text-secondary">
+      Cuidar de <span class="text-primary relative inline-block">
+        Animais
+        <svg class="absolute w-full h-3 -bottom-1 left-0 text-orange-200 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none">
+           <path d="M0 5 Q 50 10 100 5" stroke="currentColor" stroke-width="8" fill="none" />
+        </svg>
+      </span><br>
+      Ficou Mais Fácil
     </h1>
 
-    <p class="text-lg text-neutral-content text-secondary">
-      Sistema Completo pensado para clínicas veterinárias que amam o que fazem.
+    <p class="text-lg md:text-xl text-gray-500 font-light max-w-lg mx-auto lg:mx-0 leading-relaxed">
+      Sistema completo, intuitivo e pensado para clínicas veterinárias que amam o que fazem e querem crescer.
     </p>
 
-    <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
-      <a class="btn btn-primary px-8 py-3 text-lg">Começar</a>
-      <a class="btn btn-neutral btn-outline px-8 py-3 text-lg">Ler mais</a>
+    <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 pt-2">
+      <a class="btn btn-primary px-8 py-4 h-auto text-lg text-white rounded-xl shadow-lg shadow-orange-300/50 hover:-translate-y-1 transition-transform">Começar Agora</a>
+      <a class="btn btn-ghost hover:bg-orange-50 px-8 py-4 h-auto text-lg text-secondary rounded-xl border-2 border-transparent hover:border-orange-100">Saiba mais</a>
     </div>
   </div>
 
-  <!-- Imagem -->
-  <div class="flex justify-center">
-    <img src="/assets/grupo_animais.png" alt="Grupo de animais" class="max-w-full h-auto">
+  <div class="flex justify-center relative">
+    <div class="absolute bg-orange-200 rounded-full w-96 h-96 opacity-20 blur-3xl -z-10 top-10 right-10"></div>
+    <img src="/assets/grupo_animais.png" alt="Grupo de animais" class="max-w-full h-auto drop-shadow-2xl hover:scale-105 transition-transform duration-500">
   </div>
 </div>
 
-<div class="bg-zinc-100">
-  <!-- Bottom section -->
-  <div class="bg-primary text-white py-5 px-8 lg:px-20 flex flex-col lg:flex-row items-start lg:items-center gap-12">
-    <!-- Left Text -->
-    <div class="flex-1">
-      <h3 class="text-3xl md:text-4xl font-bold mb-4">Como ter acesso ao sistema</h3>
-      <p class="text-lg">Siga os passos abaixo para começar a usar nossa plataforma.</p>
+<div class="bg-white py-20 relative overflow-hidden">
+  <div class="bg-primary absolute top-0 left-0 w-full h-2/3 -z-0 rounded-b-[3rem] lg:rounded-b-[5rem]"></div>
+  
+  <div class="container mx-auto px-8 lg:px-20 relative z-10">
+    <div class="text-white text-center lg:text-left mb-12">
+      <h3 class="text-3xl md:text-4xl font-display font-bold mb-4">Como ter acesso ao sistema</h3>
+      <p class="text-lg opacity-90 font-light">Siga os passos abaixo para transformar sua clínica.</p>
     </div>
 
-    <!-- Cards -->
-    <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
-      <!-- Card 1 -->
-      <div class="bg-white text-center rounded-lg p-6 shadow-md text-zinc-800">
-        <img src="/assets/mensagem.svg" alt="Ícone mensagem" class="mx-auto mb-4 w-16 h-16" />
-        <p class="font-semibold">Mande uma mensagem</p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="bg-white text-center rounded-2xl p-8 shadow-soft hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group cursor-default">
+        <div class="w-20 h-20 bg-orange-50 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-primary transition-colors duration-300">
+            <img src="/assets/mensagem.svg" alt="Ícone mensagem" class="w-10 h-10 group-hover:brightness-0 group-hover:invert transition-all" />
+        </div>
+        <h4 class="font-display font-bold text-xl text-secondary mb-2">1. Mande uma mensagem</h4>
+        <p class="text-gray-500 text-sm leading-relaxed">Entre em contato com nossa equipe para tirar suas dúvidas iniciais.</p>
       </div>
 
-      <!-- Card 2 -->
-      <div class="bg-white text-center rounded-lg p-6 shadow-md text-zinc-800">
-        <img src="/assets/plano.svg" alt="Ícone plano" class="mx-auto mb-4 w-16 h-16" />
-        <p class="font-semibold">Escolha um plano</p>
+      <div class="bg-white text-center rounded-2xl p-8 shadow-soft hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group cursor-default">
+        <div class="w-20 h-20 bg-orange-50 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-primary transition-colors duration-300">
+             <img src="/assets/plano.svg" alt="Ícone plano" class="w-10 h-10 group-hover:brightness-0 group-hover:invert transition-all" />
+        </div>
+        <h4 class="font-display font-bold text-xl text-secondary mb-2">2. Escolha um plano</h4>
+        <p class="text-gray-500 text-sm leading-relaxed">Selecione o pacote ideal que atende ao tamanho da sua clínica.</p>
       </div>
 
-      <!-- Card 3 -->
-      <div class="bg-white text-center rounded-lg p-6 shadow-md text-zinc-800">
-        <img src="/assets/sistema.svg" alt="Ícone acesso" class="mx-auto mb-4 w-16 h-16" />
-        <p class="font-semibold">Acesse o sistema</p>
+      <div class="bg-white text-center rounded-2xl p-8 shadow-soft hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group cursor-default">
+        <div class="w-20 h-20 bg-orange-50 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-primary transition-colors duration-300">
+            <img src="/assets/sistema.svg" alt="Ícone acesso" class="w-10 h-10 group-hover:brightness-0 group-hover:invert transition-all" />
+        </div>
+        <h4 class="font-display font-bold text-xl text-secondary mb-2">3. Acesse o sistema</h4>
+        <p class="text-gray-500 text-sm leading-relaxed">Receba suas credenciais e comece a gerenciar tudo em um só lugar.</p>
       </div>
     </div>
   </div>
@@ -80,143 +92,133 @@
 
 <main>
 
-  <div class="bg-zinc-50">
-    <div class="grid grid-cols-1 lg:grid-cols-2 px-8 lg:px-20 py-10">
-      <!-- Texto Principal -->
-      <div class="space-y-5 lg:text-left">
-        <h2 class="text-3xl md:text-4xl font-bold leading-tight">
-          <span class="text-primary">O Que faz o Sistema Ser</span><br>
-          <span class="text-secondary">Especial?</span>
+  <div class="bg-zinc-50 py-24"  id="servicos">
+    <div class="px-8 lg:px-20 mb-16 flex flex-col md:flex-row justify-between items-end gap-6">
+      <div class="space-y-4 max-w-2xl">
+        <span class="text-primary font-bold uppercase tracking-wider text-sm">Recursos Exclusivos</span>
+        <h2 class="text-3xl md:text-4xl font-display font-bold leading-tight text-secondary">
+          O Que Faz o Sistema Ser <span class="text-primary">Especial?</span>
         </h2>
       </div>
-
-      <div class="space-y-5 lg:text-right">
-        <h2 class="text-3xl md:text-4xl font-bold leading-tight">
-          <span class="text-secondary">Recursos</span><br>
-        </h2>
+      <div class="hidden md:block">
+        <a class="btn btn-outline btn-secondary rounded-full px-6">Ver todos os recursos</a>
       </div>
     </div>
 
-    <div class="py-5 px-8 lg:px-20 flex flex-col lg:flex-row items-start lg:items-center gap-12">
-
-      <!-- Cards -->
-      <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
-        <!-- Card 1 -->
-        <div class="bg-orange-lite text-center rounded-lg p-6 shadow-md text-zinc-800">
-          <img src="/assets/prontuario.svg" alt="Ícone mensagem" class="mx-auto mb-4 w-16 h-16" />
-          <p class="font-semibold text-secondary text-2xl">Prontuários Organizados</p>
-          <p class="font-semibold text-secondary text-sm">Acompanhe o histórico completo de cada pet — consultas,
-            exames,
-            vacinas e tratamentos em um só lugar.</p>
+    <div class="px-8 lg:px-20">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-zinc-100 hover:shadow-xl hover:border-orange-100 transition-all duration-300 group">
+          <div class="bg-orange-lite w-14 h-14 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+            <img src="/assets/prontuario.svg" alt="Ícone" class="w-8 h-8" />
+          </div>
+          <h3 class="font-display font-bold text-secondary text-xl mb-3">Prontuários Organizados</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Acompanhe o histórico completo de cada pet — consultas, exames, vacinas e tratamentos.</p>
         </div>
 
-        <!-- Card 2 -->
-        <div class="bg-orange-lite text-center rounded-lg p-6 shadow-md text-zinc-800">
-          <img src="/assets/calendario.svg" alt="Ícone plano" class="mx-auto mb-4 w-16 h-16" />
-          <p class="font-semibold text-secondary text-2xl">Agendamento Inteligente</p>
-          <p class="font-semibold text-secondary text-sm">Agende atendimentos com poucos cliques, visualize por dia,
-            semana ou mês e evite conflitos de horário.</p>
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-zinc-100 hover:shadow-xl hover:border-orange-100 transition-all duration-300 group">
+           <div class="bg-orange-lite w-14 h-14 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+            <img src="/assets/calendario.svg" alt="Ícone" class="w-8 h-8" />
+          </div>
+          <h3 class="font-display font-bold text-secondary text-xl mb-3">Agendamento Inteligente</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Agende atendimentos com poucos cliques e evite conflitos de horário na sua agenda.</p>
         </div>
 
-        <!-- Card 3 -->
-        <div class="bg-orange-lite text-center rounded-lg p-6 shadow-md text-zinc-800">
-          <img src="/assets/registro.svg" alt="Ícone acesso" class="mx-auto mb-4 w-16 h-16" />
-          <p class="font-semibold text-secondary text-2xl">Registre Exames e Vacinas</p>
-          <p class="font-semibold text-secondary text-sm">Armazene exames com facilidade e mantenha o controle das
-            vacinas
-            sempre atualizado.</p>
-        </div>
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-zinc-100 hover:shadow-xl hover:border-orange-100 transition-all duration-300 group">
+            <div class="bg-orange-lite w-14 h-14 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+             <img src="/assets/registro.svg" alt="Ícone" class="w-8 h-8" />
+           </div>
+           <h3 class="font-display font-bold text-secondary text-xl mb-3">Exames e Vacinas</h3>
+           <p class="text-gray-500 text-sm leading-relaxed">Armazene exames com facilidade e mantenha o controle das vacinas sempre atualizado.</p>
+         </div>
 
-        <div class="bg-orange-lite text-center rounded-lg p-6 shadow-md text-zinc-800">
-          <img src="/assets/lembrete.svg" alt="Ícone acesso" class="mx-auto mb-4 w-16 h-16" />
-          <p class="font-semibold text-secondary text-2xl">Lembretes Automáticos</p>
-          <p class="font-semibold text-secondary text-sm">Envie mensagens automáticas para lembrar os tutores sobre
-            consultas e vacinas, reduzindo faltas.</p>
-        </div>
+         <div class="bg-white rounded-2xl p-8 shadow-sm border border-zinc-100 hover:shadow-xl hover:border-orange-100 transition-all duration-300 group">
+            <div class="bg-orange-lite w-14 h-14 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+             <img src="/assets/lembrete.svg" alt="Ícone" class="w-8 h-8" />
+           </div>
+           <h3 class="font-display font-bold text-secondary text-xl mb-3">Lembretes Automáticos</h3>
+           <p class="text-gray-500 text-sm leading-relaxed">Envie mensagens automáticas para lembrar os tutores, reduzindo drasticamente as faltas.</p>
+         </div>
 
-        <div class="bg-orange-lite text-center rounded-lg p-6 shadow-md text-zinc-800">
-          <img src="/assets/relatorio.svg" alt="Ícone acesso" class="mx-auto mb-4 w-16 h-16" />
-          <p class="font-semibold text-secondary text-2xl">Relatórios em Tempo Real</p>
-          <p class="font-semibold text-secondary text-sm">Gere relatórios de atendimentos, agendamentos e produtividade
-            dos profissionais com um clique.</p>
-        </div>
+         <div class="bg-white rounded-2xl p-8 shadow-sm border border-zinc-100 hover:shadow-xl hover:border-orange-100 transition-all duration-300 group">
+            <div class="bg-orange-lite w-14 h-14 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+             <img src="/assets/relatorio.svg" alt="Ícone" class="w-8 h-8" />
+           </div>
+           <h3 class="font-display font-bold text-secondary text-xl mb-3">Relatórios em Tempo Real</h3>
+           <p class="text-gray-500 text-sm leading-relaxed">Gere relatórios de produtividade e financeiro com apenas um clique.</p>
+         </div>
 
-        <div class="bg-orange-lite text-center rounded-lg p-6 shadow-md text-zinc-800">
-          <img src="/assets/ia.svg" alt="Ícone acesso" class="mx-auto mb-4 w-16 h-16" />
-          <p class="font-semibold text-secondary text-2xl"> Inteligência Artificial</p>
-          <p class="font-semibold text-secondary text-sm">Pensado para o futuro: nosso sistema poderá integrar recursos
-            de
-            IA para diagnóstico e atendimento.</p>
-        </div>
+         <div class="bg-white rounded-2xl p-8 shadow-sm border border-zinc-100 hover:shadow-xl hover:border-orange-100 transition-all duration-300 group">
+            <div class="bg-orange-lite w-14 h-14 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+             <img src="/assets/ia.svg" alt="Ícone" class="w-8 h-8" />
+           </div>
+           <h3 class="font-display font-bold text-secondary text-xl mb-3">Inteligência Artificial</h3>
+           <p class="text-gray-500 text-sm leading-relaxed">Recursos futuros de IA para auxiliar no diagnóstico e atendimento.</p>
+         </div>
+
       </div>
     </div>
   </div>
 
-  <div class="bg-zinc-50">
-    <!-- Título Principal -->
-    <div class="px-8 lg:px-20 py-10">
-      <h2 class="text-3xl md:text-4xl font-bold leading-tight">
-        <span class="text-secondary">Quem Somos </span>
-        <span class="text-primary">Nós?</span>
-      </h2>
-    </div>
+  <div class="bg-white py-24 px-8 lg:px-20"  id="sobre">
+    <div class="bg-orange-lite rounded-[3rem] p-8 lg:p-16 relative overflow-hidden">
+      <div class="absolute -top-24 -right-24 w-64 h-64 bg-orange-200 rounded-full opacity-30 blur-3xl"></div>
 
-    <!-- Seção imagem + texto -->
-    <div class="px-8 lg:px-20 pb-16">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-
-        <!-- Imagem -->
-        <div class="flex justify-center">
-          <img src="/assets/grupo_animais2.png" alt="Grupo de animais" class="max-w-full h-auto rounded-xl shadow-md">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+        <div class="flex justify-center order-2 lg:order-1">
+          <img src="/assets/grupo_animais2.png" alt="Grupo de animais" class="w-full max-w-md rounded-2xl shadow-xl rotate-3 hover:rotate-0 transition-transform duration-500 border-4 border-white">
         </div>
 
-        <!-- Texto -->
-        <div class="bg-orange-lite rounded-xl p-8 shadow-lg text-zinc-800 h-full flex items-center">
-          <p class="font-semibold text-base md:text-lg text-secondary leading-relaxed text-center lg:text-left">
-            Um projeto que nasceu da vontade de unir tecnologia e cuidado. <br><br>
-            Desenvolvido com carinho por uma profissional que entende os desafios do dia a dia em clínicas veterinárias,
-            este sistema foi pensado para <strong>simplificar processos</strong>, <strong>reduzir o retrabalho</strong>
-            e <strong>valorizar o tempo</strong> de quem cuida dos nossos melhores amigos: os animais.
-          </p>
+        <div class="space-y-6 order-1 lg:order-2 lg:text-left text-center">
+            <h2 class="text-3xl md:text-4xl font-display font-bold text-secondary">
+                Quem Somos <span class="text-primary">Nós?</span>
+            </h2>
+            <div class="space-y-4">
+                <p class="text-lg text-secondary/80 leading-relaxed font-light">
+                    Um projeto que nasceu da vontade de unir <strong class="text-secondary font-bold">tecnologia</strong> e <strong class="text-secondary font-bold">cuidado</strong>.
+                </p>
+                <p class="text-base text-gray-500 leading-relaxed">
+                    Desenvolvido com carinho por uma profissional que entende os desafios do dia a dia em clínicas veterinárias,
+                    este sistema foi pensado para simplificar processos, reduzir o retrabalho e valorizar o tempo de quem cuida dos nossos melhores amigos.
+                </p>
+            </div>
+            <button class="btn btn-secondary text-white rounded-full px-8 mt-4 shadow-lg hover:scale-105 transition-transform">Conheça nossa história</button>
         </div>
-
       </div>
     </div>
   </div>
 </main>
 
-<footer class="bg-primary text-white py-6">
-  <div
-    class="container mx-auto mb-5 px-6 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start text-center lg:text-left gap-6">
-
-    <!-- Coluna 1: Logo e slogan -->
-    <div>
-      <h2 class="text-2xl font-bold text-secondary">VetClinic+</h2>
-      <p class="text-sm italic text-secondary">Cuidando com Tecnologia</p>
+<footer class="bg-secondary text-white pt-16 pb-6">
+  <div class="container mx-auto px-6 lg:px-20 grid grid-cols-1 md:grid-cols-3 gap-12 mb-12 text-center md:text-left">
+    
+    <div class="space-y-4">
+      <h2 class="text-3xl font-display font-bold text-white">VetClinic<span class="text-primary">+</span></h2>
+      <p class="text-sm opacity-70 max-w-xs mx-auto md:mx-0">Transformando a gestão veterinária com tecnologia de ponta e muito carinho pelos animais.</p>
     </div>
 
-    <!-- Coluna 2: Links importantes -->
     <div>
-      <h3 class="font-semibold mb-2">Links Importantes</h3>
-      <div class="flex justify-center lg:justify-start gap-4 text-2xl">
-        <a href="#"><i class="pi pi-youtube"></i></a>
-        <a href="#"><i class="pi pi-instagram"></i></a>
-        <a href="#"><i class="pi pi-facebook"></i></a>
-        <a href="#"><i class="pi pi-whatsapp"></i></a>
+      <h3 class="font-display font-bold text-lg mb-6 text-orange-200">Links Rápidos</h3>
+      <ul class="space-y-3 text-sm opacity-80">
+        <li><a href="#" class="hover:text-primary transition-colors">Home</a></li>
+        <li><a href="#" class="hover:text-primary transition-colors">Planos</a></li>
+        <li><a href="#" class="hover:text-primary transition-colors">Blog</a></li>
+        <li><a href="#" class="hover:text-primary transition-colors">Suporte</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="font-display font-bold text-lg mb-6 text-orange-200">Fale Conosco</h3>
+      <div class="flex justify-center md:justify-start gap-4 text-2xl mb-4">
+        <a href="#" class="hover:text-primary hover:-translate-y-1 transition-all"><i class="pi pi-instagram"></i></a>
+        <a href="#" class="hover:text-primary hover:-translate-y-1 transition-all"><i class="pi pi-facebook"></i></a>
+        <a href="#" class="hover:text-primary hover:-translate-y-1 transition-all"><i class="pi pi-whatsapp"></i></a>
       </div>
+      <p class="text-sm opacity-70">vetclinic&#64;gmail.com</p>
     </div>
-
-    <!-- Coluna 3: Contato -->
-    <div>
-      <h3 class="font-semibold mb-2">Contato</h3>
-      <p class="text-sm">vetclinic&#64;gmail.com</p>
-      <p class="text-sm">Tel: +56465444654</p>
-    </div>
-
   </div>
 
-  <!-- Linha inferior -->
-  <div class="bg-orange-lite text-center py-3 text-xs text-zinc-700">
-    © 2001-2022, All Rights Reserved
+  <div class="border-t border-white/10 pt-6 text-center text-xs opacity-50">
+    © 2025 VetClinic+. Todos os direitos reservados.
   </div>
 </footer>
