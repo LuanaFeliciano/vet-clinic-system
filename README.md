@@ -1,59 +1,50 @@
-# VetClinic
+# 🐾 VetClinic+
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.3.
+> **Cuidar de animais ficou mais fácil.**
 
-## Development server
+![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![PrimeNG](https://img.shields.io/badge/PrimeNG-E30030?style=for-the-badge&logo=primeng&logoColor=white)
+![Status](https://img.shields.io/badge/Status-Em_Desenvolvimento-yellow?style=for-the-badge)
 
-To start a local development server, run:
+## 📖 Sobre o Projeto
 
-```bash
-ng serve
-```
+O **VetClinic+** é um sistema de gestão completo desenvolvido para clínicas veterinárias. O projeto nasceu da necessidade de unir **tecnologia de ponta** com o **cuidado real** do dia a dia veterinário.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Diferente de sistemas genéricos, o VetClinic+ é projetado com a visão de quem conhece a rotina clínica, visando otimizar prontuários, agendamentos e o relacionamento com os tutores.
 
-## Code scaffolding
+### 📸 Preview
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+![Preview da Landing Page](https://github.com/user-attachments/assets/008aa40f-cb72-4cf6-bda4-d8b5b64083e5)
 
-```bash
-ng generate component component-name
-```
+> *Atualmente, o projeto conta com a Landing Page implementada (responsiva e moderna), servindo como porta de entrada para o sistema SaaS.*
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## ✨ Funcionalidades Planejadas
 
-## Building
+O sistema visa cobrir as seguintes áreas (conforme apresentado na Landing Page):
 
-To build the project run:
+- 📋 **Prontuários Organizados:** Histórico completo de consultas, exames e tratamentos.
+- 📅 **Agendamento Inteligente:** Gestão de agenda para evitar conflitos.
+- 💉 **Controle de Vacinas e Exames:** Armazenamento seguro e fácil acesso.
+- 🔔 **Lembretes Automáticos:** Redução de faltas com notificações para tutores.
+- 📊 **Relatórios Financeiros:** Visão clara da saúde financeira da clínica.
+- 🤖 **IA Auxiliar:** Recursos futuros para auxílio no diagnóstico.
 
-```bash
-ng build
-```
+---
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## 🛠️ Tecnologias Utilizadas
 
-## Running unit tests
+Este projeto utiliza as versões mais recentes do ecossistema Angular para garantir performance e longevidade.
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+- **Framework:** [Angular v20+](https://angular.io/)
+- **Estilização:**
+  - [Tailwind CSS v4](https://tailwindcss.com/) (Estilização utilitária)
+  - [DaisyUI v5](https://daisyui.com/) (Componentes UI para Tailwind)
+- **Componentes Ricos:**
+  - [PrimeNG v20](https://primeng.org/)
+  - [PrimeIcons](https://primeng.org/icons)
+- **Roteamento:** Angular Router
 
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
