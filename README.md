@@ -15,7 +15,7 @@ Diferente de sistemas genéricos, o VetClinic+ é projetado com a visão de quem
 
 ### 📸 Preview
 
-![Preview da Landing Page](https://github.com/user-attachments/assets/008aa40f-cb72-4cf6-bda4-d8b5b64083e5)
+![Preview da Landing Page](https://github.com/user-attachments/assets/f1cfb70a-9cf6-4b2c-8010-50976bd7898c)
 
 > *Atualmente, o projeto conta com a Landing Page implementada (responsiva e moderna), servindo como porta de entrada para o sistema SaaS.*
 
