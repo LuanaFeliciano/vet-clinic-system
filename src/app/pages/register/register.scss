@@ -1,0 +1,12 @@
+.step:before {
+  transition: background-color 0.4s ease-in-out;
+}
+
+.step:after {
+  transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  transition-delay: 0.2s;
+}
+
+.step {
+  transition: color 0.3s ease;
+}

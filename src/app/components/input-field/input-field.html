@@ -1,0 +1,20 @@
+<div class="form-control w-full">
+    <label class="label pt-0" *ngIf="label">
+        <span class="label-text font-semibold text-gray-700">{{ label }}</span>
+    </label>
+
+    <div class="relative">
+        <input [type]="inputType" [placeholder]="placeholder" [formControl]="control"
+            class="input input-bordered w-full bg-gray-50 focus:bg-white focus:input-primary transition-all"
+            [ngClass]="{'input-error': hasError(), 'pr-10': isPassword}" />
+
+        <button *ngIf="isPassword" type="button" (click)="togglePassword()"
+            class="absolute right-3 top-3 text-gray-400 hover:text-primary transition-colors">
+            <i class="pi" [ngClass]="showPassword ? 'pi-eye-slash' : 'pi-eye'"></i>
+        </button>
+    </div>
+
+    <span *ngIf="hasError() && errorMessage" class="text-xs text-error mt-1 block">
+        {{ errorMessage }}
+    </span>
+</div>

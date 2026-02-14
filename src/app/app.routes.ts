@@ -9,6 +9,12 @@ export const routes: Routes = [
     children: [
       { path: '', component: Landing },
       {
+        path: 'login',
+        loadComponent: () =>
+          import('./pages/login/login')
+            .then(c => c.Login)
+      },
+      {
         path: 'register',
         loadComponent: () =>
           import('./pages/register/register')

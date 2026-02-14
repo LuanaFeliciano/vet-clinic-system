@@ -1,20 +1,46 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { ReactiveFormsModule, FormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule, FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { RouterModule } from '@angular/router'; // Importante para o routerLink funcionar
+import { InputFieldComponent } from '../../components/input-field/input-field';
+import { trigger, style, animate, transition } from '@angular/animations';
+import { HttpErrorResponse } from '@angular/common/http';
+import { RegisterService } from '../../services/auth/register.service';
+import { ApiService } from '../../services/api/api.service';
+
 @Component({
   selector: 'app-register',
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   standalone: true,
+  imports: [
+    CommonModule, 
+    ReactiveFormsModule, 
+    FormsModule, 
+    RouterModule, 
+    InputFieldComponent
+  ],
   templateUrl: './register.html',
   styleUrl: './register.scss',
+  animations: [
+    trigger('stepAnimation', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(20px)' }),
+        animate('700ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+      ])
+    ])
+  ]
 })
 export class Register {
   registerForm!: FormGroup;
   showPassword = false;
-
   currentStep = 1;
+  isSubmitting = false;
+  apiErrorMessage: string | null = null;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private readonly fb: FormBuilder,
+    private readonly registerService: RegisterService,
+    private readonly apiService: ApiService
+  ) { }
 
   ngOnInit() {
     this.registerForm = this.fb.group({
@@ -34,6 +60,10 @@ export class Register {
     });
   }
 
+  getControl(name: string): FormControl {
+    return this.registerForm.get(name) as FormControl;
+  }
+
   passwordMatchValidator(form: FormGroup) {
     const password = form.get('password')?.value;
     const confirmPassword = form.get('confirmPassword')?.value;
@@ -43,6 +73,12 @@ export class Register {
   hasError(field: string): boolean {
     const control = this.registerForm.get(field);
     return !!(control?.invalid && (control?.dirty || control?.touched));
+  }
+
+  getFieldErrorMessage(field: string, defaultMessage: string): string {
+    const control = this.registerForm.get(field);
+    const apiMessage = control?.errors?.['api'];
+    return apiMessage ?? defaultMessage;
   }
 
   nextStep() {
@@ -55,18 +91,46 @@ export class Register {
       step1Fields.forEach(field => this.registerForm.get(field)?.markAsTouched());
     }
   }
+
   prevStep() {
     this.currentStep = 1;
   }
 
   submitForm() {
-    if (this.registerForm.valid) {
-      console.log('Enviando dados...', this.registerForm.value);
+    this.apiService.clearApiErrorsFromForm(this.registerForm);
+    this.apiErrorMessage = null;
 
-      //colocar aqui depois api, se der certo step 3
-      setTimeout(() => {
-        this.currentStep = 3;
-      }, 1000);
+    if (this.registerForm.invalid) {
+      this.registerForm.markAllAsTouched();
+      return;
     }
+
+    this.isSubmitting = true;
+
+    const payload = {
+      name: this.getControl('name').value,
+      email: this.getControl('email').value,
+      password: this.getControl('password').value,
+      password_confirmation: this.getControl('confirmPassword').value,
+      clinicName: this.getControl('clinicName').value,
+      phone: this.getControl('phone').value,
+      clinicType: this.getControl('clinicType').value
+    };
+
+    this.registerService.register(payload).subscribe({
+      next: () => {
+        this.currentStep = 3;
+        this.isSubmitting = false;
+      },
+      error: (errorResponse: HttpErrorResponse) => {
+        this.apiErrorMessage = this.apiService.handleApiFormError(
+          errorResponse,
+          this.registerForm,
+          'Não foi possível concluir o cadastro. Tente novamente.',
+          { fieldMapper: { password_confirmation: 'confirmPassword' } }
+        );
+        this.isSubmitting = false;
+      }
+    });
   }
 }

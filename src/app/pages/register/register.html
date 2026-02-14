@@ -1,169 +1,170 @@
-<div class="min-h-screen bg-zinc-50 flex">
+<div class="min-h-screen flex bg-white">
 
-    <div class="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-20 xl:px-24">
-        <div class="mx-auto w-full max-w-sm lg:w-96">
+  <div class="flex-1 flex flex-col justify-center items-center py-12 px-4 sm:px-6 lg:px-20 xl:px-24 z-10 relative">
+    
+    <div class="mx-auto w-full max-w-sm lg:w-96">
 
-            <div class="mb-10">
-                <h2 class="mt-6 text-3xl font-display font-bold text-secondary">Crie sua conta grátis</h2>
-                <p class="mt-2 text-sm text-gray-500">Comece a transformar sua clínica hoje.</p>
-            </div>
-
-            <ul class="steps w-full mb-8">
-                <li class="step step-primary">Conta</li>
-                <li class="step" [ngClass]="{'step-primary': currentStep >= 2}">Clínica</li>
-                <li class="step" [ngClass]="{'step-primary': currentStep === 3}">Pronto</li>
-            </ul>
-
-            <form *ngIf="currentStep < 3" [formGroup]="registerForm" class="space-y-5">
-
-                <div *ngIf="currentStep === 1" class="space-y-5 animate-fade-in">
-
-                    <div>
-                        <label class="label"><span class="label-text font-semibold">Nome Completo do
-                                Responsável</span></label>
-                        <input type="text" formControlName="name" placeholder="Dr. João Silva"
-                            class="input input-bordered w-full focus:input-primary transition-all"
-                            [ngClass]="{'input-error': hasError('name')}" />
-                        <span *ngIf="hasError('name')" class="text-xs text-error mt-1 block">O nome é obrigatório</span>
-                    </div>
-
-                    <div>
-                        <label class="label"><span class="label-text font-semibold">Email Corporativo</span></label>
-                        <input type="email" formControlName="email" placeholder="joao@clinicavet.com"
-                            class="input input-bordered w-full focus:input-primary transition-all"
-                            [ngClass]="{'input-error': hasError('email')}" />
-                        <span *ngIf="hasError('email')" class="text-xs text-error mt-1">Insira um email válido</span>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="form-control">
-                            <label class="label"><span class="label-text font-semibold">Senha</span></label>
-                            <div class="relative">
-                                <input [type]="showPassword ? 'text' : 'password'" formControlName="password"
-                                    placeholder="••••••••" class="input input-bordered w-full focus:input-primary pr-10"
-                                    [ngClass]="{'input-error': hasError('password')}" />
-                                <button type="button" (click)="showPassword = !showPassword"
-                                    class="absolute right-3 top-3 text-gray-400 hover:text-primary">
-                                    <i class="pi" [ngClass]="showPassword ? 'pi-eye-slash' : 'pi-eye'"></i>
-                                </button>
-                            </div>
-                            <span *ngIf="hasError('password')" class="text-xs text-error mt-1">Mínimo 6
-                                caracteres</span>
-                        </div>
-
-                        <div class="form-control">
-                            <label class="label"><span class="label-text font-semibold">Confirmar</span></label>
-                            <input type="password" formControlName="confirmPassword" placeholder="••••••••"
-                                class="input input-bordered w-full focus:input-primary"
-                                [ngClass]="{'input-error': registerForm.hasError('mismatch') && registerForm.get('confirmPassword')?.touched}" />
-                        </div>
-                    </div>
-
-                    <div *ngIf="registerForm.hasError('mismatch') && registerForm.get('confirmPassword')?.touched"
-                        class="alert alert-error text-white text-xs py-2 rounded-lg flex items-center gap-2">
-                        <i class="pi pi-times-circle"></i> As senhas não coincidem.
-                    </div>
-
-                    <div class="form-control">
-                        <label class="label cursor-pointer justify-start gap-3 items-start">
-                            <input type="checkbox" formControlName="terms"
-                                class="checkbox checkbox-primary checkbox-sm mt-1" />
-                            <span class="label-text text-sm text-gray-600 leading-tight">
-                                Li e aceito os <a href="#" class="text-primary hover:underline font-medium">Termos de
-                                    Uso</a> e <a href="#" class="text-primary hover:underline font-medium">Política de
-                                    Privacidade</a>.
-                            </span>
-                        </label>
-                        <span *ngIf="hasError('terms')" class="text-xs text-error mt-1 ml-9">Você precisa aceitar os
-                            termos.</span>
-                    </div>
-
-                    <div class="pt-2">
-                        <button type="button" (click)="nextStep()"
-                            class="btn btn-primary w-full text-white font-bold text-lg h-12 shadow-lg shadow-orange-200 hover:shadow-orange-300">
-                            Continuar <i class="pi pi-arrow-right ml-2"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <div *ngIf="currentStep === 2" class="space-y-5 animate-fade-in">
-
-                    <div>
-                        <label class="label"><span class="label-text font-semibold">Nome da Clínica</span></label>
-                        <input type="text" formControlName="clinicName" placeholder="Ex: Clínica Vida Animal"
-                            class="input input-bordered w-full focus:input-primary transition-all" />
-                        <span *ngIf="hasError('clinicName')" class="text-xs text-error mt-1">Nome da clínica
-                            obrigatório</span>
-                    </div>
-
-                    <div>
-                        <label class="label"><span class="label-text font-semibold">WhatsApp da Clínica</span></label>
-                        <input type="tel" formControlName="phone" placeholder="(11) 99999-9999"
-                            class="input input-bordered w-full focus:input-primary transition-all" />
-                    </div>
-
-                    <div>
-                        <label class="label"><span class="label-text font-semibold">Tipo de Atendimento</span></label>
-                        <select formControlName="clinicType" class="select select-bordered w-full focus:select-primary">
-                            <option value="pequenos">Pequenos Animais</option>
-                            <option value="grandes">Grandes Animais</option>
-                            <option value="misto">Misto</option>
-                        </select>
-                    </div>
-
-                    <div class="flex gap-3 pt-4">
-                        <button type="button" (click)="prevStep()" class="btn btn-ghost flex-1 border-gray-200">
-                            Voltar
-                        </button>
-
-                        <button type="button" (click)="submitForm()" [disabled]="registerForm.invalid"
-                            class="btn btn-primary flex-[2] text-white font-bold shadow-lg shadow-orange-200 hover:shadow-orange-300">
-                            Finalizar Cadastro <i class="pi pi-check ml-2"></i>
-                        </button>
-                    </div>
-                </div>
-
-            </form>
-
-            <div *ngIf="currentStep === 3" class="text-center space-y-6 animate-fade-in pt-4">
-
-                <div
-                    class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
-                    <i class="pi pi-check text-4xl text-green-600 font-bold"></i>
-                </div>
-
-                <div>
-                    <h3 class="text-3xl font-display font-bold text-secondary mb-2">Tudo Pronto!</h3>
-                    <p class="text-gray-500 leading-relaxed max-w-xs mx-auto">
-                        A clínica <strong class="text-primary">{{ registerForm.get('clinicName')?.value }}</strong> foi
-                        criada com sucesso.
-                    </p>
-                </div>
-
-                <div class="bg-blue-50 p-4 rounded-xl text-left text-sm text-blue-800 border border-blue-100">
-                    <div class="flex items-start gap-3">
-                        <i class="pi pi-info-circle text-lg mt-0.5"></i>
-                        <div>
-                            <span class="font-bold block mb-1">Próximos passos:</span>
-                            Enviamos um email de confirmação para <u>{{ registerForm.get('email')?.value }}</u>.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="pt-4">
-                    <a routerLink="/app/dashboard"
-                        class="btn btn-primary w-full text-white font-bold text-lg h-12 shadow-lg shadow-orange-200 hover:shadow-orange-300 hover:-translate-y-1 transition-all">
-                        Acessar Sistema Agora
-                    </a>
-                </div>
-
-            </div>
-
-            <div *ngIf="currentStep === 1" class="mt-8 text-center text-sm">
-                <span class="text-gray-500">Já tem uma conta?</span>
-                <a routerLink="/login"
-                    class="font-medium text-primary hover:text-orange-600 ml-1 transition-colors">Fazer login</a>
-            </div>
+      <div class="mb-10">
+        <div class="h-10 w-10 bg-primary/10 rounded-lg flex items-center justify-center mb-4 text-primary">
+            <i class="pi pi-heart-fill text-xl"></i>
         </div>
+        
+        <h2 class="text-3xl font-display font-bold text-gray-900">Crie sua conta grátis</h2>
+        <p class="mt-2 text-sm text-gray-500">Comece a transformar sua clínica hoje.</p>
+      </div>
+
+      <ul class="steps w-full mb-8">
+        <li class="step step-primary text-sm font-medium">Conta</li>
+        <li class="step text-sm font-medium" [ngClass]="{'step-primary': currentStep >= 2}">Clínica</li>
+        <li class="step text-sm font-medium" [ngClass]="{'step-primary': currentStep === 3}">Pronto</li>
+      </ul>
+
+      <form *ngIf="currentStep < 3" [formGroup]="registerForm" class="space-y-6">
+
+        <div *ngIf="apiErrorMessage" class="alert alert-error text-white rounded-lg">
+          <i class="pi pi-times-circle"></i>
+          <span>{{ apiErrorMessage }}</span>
+        </div>
+
+        <div *ngIf="currentStep === 1" @stepAnimation class="space-y-5 animate-fade-in">
+
+          <app-input-field
+            label="Nome Completo do Responsável"
+            [control]="getControl('name')"
+            placeholder="Dr. João Silva"
+            [errorMessage]="getFieldErrorMessage('name', 'O nome é obrigatório')">
+          </app-input-field>
+
+          <app-input-field
+            label="Email Corporativo"
+            type="email"
+            [control]="getControl('email')"
+            placeholder="joao@clinicavet.com"
+            [errorMessage]="getFieldErrorMessage('email', 'Insira um email válido')">
+          </app-input-field>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <app-input-field
+              label="Senha"
+              type="password"
+              [control]="getControl('password')"
+              placeholder="••••••••"
+              [errorMessage]="getFieldErrorMessage('password', 'Mínimo 6 caracteres')">
+            </app-input-field>
+
+            <app-input-field
+              label="Confirmar"
+              type="password"
+              [control]="getControl('confirmPassword')"
+              placeholder="••••••••"
+              [errorMessage]="getFieldErrorMessage('confirmPassword', 'Confirme sua senha')"
+              [forceError]="registerForm.hasError('mismatch') && getControl('confirmPassword').touched">
+            </app-input-field>
+          </div>
+
+          <div *ngIf="registerForm.hasError('mismatch') && registerForm.get('confirmPassword')?.touched"
+            class="alert alert-error text-white text-xs py-2 rounded-lg flex items-center gap-2">
+            <i class="pi pi-times-circle"></i> As senhas não coincidem.
+          </div>
+
+          <div class="form-control">
+            <label class="label cursor-pointer">
+              <input type="checkbox" formControlName="terms"
+                class="checkbox checkbox-primary checkbox-sm mt-1" />
+              <span class="label-text text-sm text-gray-600">
+                Li e aceito os <a href="#" class="text-primary hover:underline font-medium">Termos de Uso</a> e <a href="#" class="text-primary hover:underline font-medium">Política de Privacidade</a>.
+              </span>
+            </label>
+            <span *ngIf="hasError('terms')" class="text-xs text-error mt-1 ml-9">Você precisa aceitar os termos.</span>
+          </div>
+
+          <div class="pt-2">
+            <button type="button" (click)="nextStep()"
+              class="btn btn-primary w-full text-white font-bold text-lg h-12 shadow-lg shadow-orange-200/50 hover:shadow-orange-300/50 transition-all">
+              Continuar <i class="pi pi-arrow-right ml-2"></i>
+            </button>
+          </div>
+        </div>
+
+        <div *ngIf="currentStep === 2" @stepAnimation class="space-y-5 animate-fade-in">
+
+          <app-input-field
+            label="Nome da Clínica"
+            [control]="getControl('clinicName')"
+            placeholder="Ex: Clínica Vida Animal"
+            [errorMessage]="getFieldErrorMessage('clinicName', 'Nome da clínica obrigatório')">
+          </app-input-field>
+
+          <app-input-field
+            label="WhatsApp da Clínica"
+            type="tel"
+            [control]="getControl('phone')"
+            placeholder="(11) 99999-9999"
+            [errorMessage]="getFieldErrorMessage('phone', 'Informe um telefone válido')">
+          </app-input-field>
+
+          <div>
+            <label class="label pt-0"><span class="label-text font-semibold text-gray-700">Tipo de Atendimento</span></label>
+            <select formControlName="clinicType" class="select select-bordered w-full bg-gray-50 focus:bg-white focus:select-primary">
+              <option value="pequenos">Pequenos Animais</option>
+              <option value="grandes">Grandes Animais</option>
+              <option value="silvestres">Silvestres</option>
+              <option value="misto">Misto</option>
+            </select>
+          </div>
+
+          <div class="flex gap-3 pt-4">
+            <button type="button" (click)="prevStep()" class="btn btn-ghost flex-1 border-gray-200 text-gray-600 hover:bg-gray-100">
+              Voltar
+            </button>
+
+            <button type="button" (click)="submitForm()" [disabled]="registerForm.invalid || isSubmitting"
+              class="btn btn-primary flex-[2] text-white font-bold shadow-lg shadow-orange-200/50 hover:shadow-orange-300/50 transition-all">
+              {{ isSubmitting ? 'Enviando...' : 'Finalizar Cadastro' }} <i class="pi pi-check ml-2"></i>
+            </button>
+          </div>
+        </div>
+
+      </form>
+
+      <div *ngIf="currentStep === 3" @stepAnimation class="text-center space-y-6 animate-fade-in pt-4">
+
+        <div class="w-24 h-24 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm border border-green-100">
+          <i class="pi pi-check text-4xl text-green-600 font-bold"></i>
+        </div>
+
+        <div>
+          <h3 class="text-3xl font-display font-bold text-gray-900 mb-2">Tudo Pronto!</h3>
+          <p class="text-gray-500 leading-relaxed max-w-xs mx-auto">
+            A clínica <strong class="text-primary">{{ registerForm.get('clinicName')?.value }}</strong> foi criada com sucesso.
+          </p>
+        </div>
+
+        <div class="bg-blue-50 p-4 rounded-xl text-left text-sm text-blue-800 border border-blue-100">
+          <div class="flex items-start gap-3">
+            <i class="pi pi-info-circle text-lg mt-0.5"></i>
+            <div>
+              <span class="font-bold block mb-1">Próximos passos:</span>
+              Enviamos um email de confirmação para <u>{{ registerForm.get('email')?.value }}</u>.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="currentStep === 1" @stepAnimation class="mt-8 text-center text-sm">
+        <span class="text-gray-500">Já tem uma conta?</span>
+        <a routerLink="/login" class="font-medium text-primary hover:text-orange-600 ml-1 transition-colors">Fazer login</a>
+      </div>
+
     </div>
+  </div>
+
+  <div class="hidden lg:block relative w-0 flex-1">
+    <img class="absolute inset-0 h-full w-full object-cover" 
+         src="assets/vetIlustration.png" 
+         alt="Veterinária">
+    
+    <div class="absolute inset-0 bg-gradient-to-r from-white/10 to-orange-900/20 mix-blend-multiply"></div>
+  </div>
+
 </div>
