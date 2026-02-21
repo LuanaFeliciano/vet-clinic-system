@@ -51,3 +51,24 @@ h1, h2, h3, h4, h5, h6, .font-display {
 .shadow-soft {
     box-shadow: 0 10px 40px -10px rgba(0,0,0,0.08);
 }
+
+/* ==================================== */
+/*TEMA DO PAINEL */
+/* ==================================== */
+:root {
+  --panel-bg: #FDF8F3;
+  --panel-surface: #FFFFFF;
+  --panel-border: #F4DFC9;
+  --panel-brand-soft: #FFF2E2;
+  --panel-brand: #F7921C;
+  --panel-brand-strong: #6C3F16;
+}
+
+.panel-bg {
+  background-color: var(--panel-bg);
+}
+
+.panel-surface {
+  background-color: var(--panel-surface);
+  border: 1px solid var(--panel-border);
+}

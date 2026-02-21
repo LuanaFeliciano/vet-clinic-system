@@ -43,6 +43,11 @@ export class Login {
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
 
+    if (this.loginService.isLoggedIn()) {
+      this.router.navigateByUrl(this.loginService.getDefaultPanelRoute());
+      return;
+    }
+
     this.route.queryParams.subscribe(params => {
       if (params['verified'] === 'true') {
         this.verifiedMessage = 'Email verificado com sucesso! Você já pode entrar.';
@@ -78,10 +83,9 @@ export class Login {
     this.isSubmitting = true;
 
     this.loginService.login(this.loginForm.value).subscribe({
-      next: (res) => {
-        console.log("res", res)
+      next: () => {
         this.isSubmitting = false;
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl(this.loginService.getDefaultPanelRoute());
       },
       error: (errorResponse: HttpErrorResponse) => {
         this.apiErrorMessage = this.apiService.handleApiFormError(
