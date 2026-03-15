@@ -2,7 +2,16 @@ import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of, tap } from 'rxjs';
 import { ApiService } from '../api/api.service';
 import { API_ENDPOINTS } from '../api/api.config';
-import { AuthSession, AuthUser, LoginBody, LoginResponse, NavLink, UserRole } from './models/auth.models';
+import {
+  AuthSession,
+  AuthUser,
+  ForgotPasswordBody,
+  LoginBody,
+  LoginResponse,
+  NavLink,
+  ResetPasswordBody,
+  UserRole
+} from './models/auth.models';
 
 @Injectable({ providedIn: 'root' })
 export class LoginService {
@@ -29,6 +38,18 @@ export class LoginService {
     return this.apiService
       .post<LoginResponse>(API_ENDPOINTS.login, body)
       .pipe(tap((response) => this.setSession(response)));
+  }
+
+  forgotPassword(body: ForgotPasswordBody): Observable<string> {
+    return this.apiService
+      .post<{ message?: string }>(API_ENDPOINTS.forgotPassword, body)
+      .pipe(map((response) => response.message ?? 'Confira seu e-mail para redefinir a senha.'));
+  }
+
+  resetPassword(body: ResetPasswordBody): Observable<string> {
+    return this.apiService
+      .post<{ message?: string }>(API_ENDPOINTS.resetPassword, body)
+      .pipe(map((response) => response.message ?? 'Senha redefinida com sucesso.'));
   }
 
   logout(): Observable<void> {

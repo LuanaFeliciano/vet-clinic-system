@@ -1,23 +1,232 @@
-<section class="space-y-6">
+<p-toast position="top-right"></p-toast>
+<p-confirmDialog></p-confirmDialog>
+
+<section class="flex flex-col gap-6">
   <header class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-    <p class="text-sm font-semibold uppercase tracking-wider text-slate-500">Administração</p>
-    <h1 class="mt-2 text-2xl font-semibold text-slate-800">Usuários da clínica</h1>
-    <p class="mt-2 text-sm text-slate-600">
-      Gerencie permissões e acessos de acordo com o perfil de cada colaborador.
-    </p>
+    <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+      <div>
+        <p class="text-sm font-semibold uppercase tracking-wider text-slate-500">Administração</p>
+        <h1 class="mt-2 text-2xl font-semibold text-slate-800">Equipe e Acessos</h1>
+        <p class="mt-2 text-sm text-slate-600">
+          Cadastre colaboradores, ajuste permissões e mantenha o acesso da clínica organizado.
+        </p>
+      </div>
+
+      <button
+        type="button"
+        pButton
+        label="Novo colaborador"
+        icon="pi pi-user-plus"
+        severity="secondary"
+        [outlined]="true"
+        (click)="openCreateDialog()"
+      ></button>
+    </div>
   </header>
 
-  <article class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-    <div class="grid grid-cols-[2fr_1.4fr_1.2fr] gap-4 border-b border-slate-200 bg-slate-50 px-5 py-3 text-xs font-semibold uppercase tracking-wide text-slate-500">
-      <span>Nome</span>
-      <span>E-mail</span>
-      <span>Perfil</span>
+  <section class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
+    <div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <span class="p-input-icon-left w-full sm:max-w-sm">
+        
+        <input
+          #searchInput
+          pInputText
+          type="text"
+          class="w-full"
+          placeholder="Buscar por nome, e-mail ou cargo"
+          [value]="search"
+          (input)="search = searchInput.value"
+        />
+      </span>
+
+      <button
+        type="button"
+        pButton
+        icon="pi pi-refresh"
+        label="Atualizar"
+        [text]="true"
+        severity="secondary"
+        (click)="loadUsers()"
+      ></button>
     </div>
 
-    <div class="grid grid-cols-[2fr_1.4fr_1.2fr] gap-4 px-5 py-4 text-sm text-slate-700">
-      <span>Dr. Luana</span>
-      <span>luanagomesfeliciano@gmail.com</span>
-      <span class="font-semibold">admin</span>
-    </div>
-  </article>
+    <p-table
+      [value]="filteredUsers"
+      [loading]="isLoading"
+      [paginator]="true"
+      [rows]="10"
+      [rowsPerPageOptions]="[10, 20, 50]"
+      responsiveLayout="scroll"
+      styleClass="p-datatable-sm"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Usuário</th>
+          <th>E-mail</th>
+          <th>Cargo</th>
+          <th>Status</th>
+          <th class="w-[132px] text-center">Ações</th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-user>
+        <tr>
+          <td>
+            <div class="flex items-center gap-3">
+              <div class="flex h-9 w-9 items-center justify-center rounded-full bg-orange-100 text-xs font-bold text-orange-700">
+                {{ usersService.getInitials(user.name) }}
+              </div>
+              <span class="font-medium text-slate-800">{{ user.name }}</span>
+            </div>
+          </td>
+          <td class="text-slate-600">{{ user.email }}</td>
+          <td>
+            <p-tag [value]="usersService.getRoleLabel(user.role)" [severity]="usersService.getRoleSeverity(user.role)"></p-tag>
+          </td>
+          <td>
+            <p-tag [value]="usersService.getStatusLabel(user)" [severity]="usersService.getStatusSeverity(user)"></p-tag>
+          </td>
+          <td class="text-center">
+            <button
+              type="button"
+              pButton
+              icon="pi pi-pencil"
+              [rounded]="true"
+              [text]="true"
+              severity="secondary"
+              (click)="openEditDialog(user)"
+            ></button>
+            <button *ngIf="user.is_active"
+              type="button"
+              pButton
+              icon="pi pi-user-minus"
+              [rounded]="true"
+              [text]="true"
+              severity="danger"
+              [loading]="deactivatingUserId === user.id"
+              (click)="deactivateUser(user)"
+            ></button>
+            <button
+              *ngIf="!user.is_active"
+              type="button"
+              pButton
+              icon="pi pi-user-plus"
+              [rounded]="true"
+              [text]="true"
+              severity="success"
+              [loading]="reactivatingUserId === user.id"
+              (click)="reactivateUser(user)"
+            ></button>
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="6" class="py-8 text-center text-sm text-slate-500">
+            Nenhum colaborador encontrado.
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </section>
 </section>
+
+<p-dialog
+  [(visible)]="dialogVisible"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  [closable]="!isSaving"
+  [dismissableMask]="false"
+  [style]="{ width: 'min(92vw, 640px)' }"
+  [header]="dialogTitle"
+  (onHide)="closeDialog()"
+>
+  <form [formGroup]="userForm" class="flex flex-col gap-4" (ngSubmit)="saveUser()">
+    <div *ngIf="apiErrorMessage" class="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+      {{ apiErrorMessage }}
+    </div>
+
+    <div class="grid gap-4 md:grid-cols-2">
+      <div class="md:col-span-2">
+        <app-input-field
+          label="Nome"
+          placeholder="Ex: Ana Souza"
+          [control]="userForm.controls.name"
+          [errorMessage]="getErrorMessage('name')"
+        ></app-input-field>
+      </div>
+
+      <div class="md:col-span-2">
+        <app-input-field
+          label="E-mail"
+          type="email"
+          placeholder="ana@clinica.com"
+          [control]="userForm.controls.email"
+          [errorMessage]="getErrorMessage('email')"
+        ></app-input-field>
+      </div>
+
+      <div class="md:col-span-2">
+        <label for="role" class="mb-1 block text-sm font-medium text-slate-700">Cargo</label>
+        <p-select
+          id="role"
+          [options]="roleOptions"
+          optionLabel="label"
+          optionValue="value"
+          formControlName="role"
+          placeholder="Selecione o cargo"
+          appendTo="body"
+          class="w-full"
+        ></p-select>
+        <small *ngIf="hasError('role')" class="mt-1 block text-red-600">{{ getErrorMessage('role') }}</small>
+      </div>
+
+      <div  *ngIf="!isEditing">
+        <app-input-field
+          label="Senha"
+          type="password"
+          placeholder="******"
+          [control]="userForm.controls.password"
+          [errorMessage]="getErrorMessage('password')"
+        ></app-input-field>
+      </div>
+
+      <div *ngIf="!isEditing">
+        <app-input-field
+          label="Confirmar senha"
+          type="password"
+          placeholder="******"
+          [control]="userForm.controls.password_confirmation"
+          [errorMessage]="getErrorMessage('password_confirmation')"
+        ></app-input-field>
+      </div>
+    </div>
+
+    <small *ngIf="userForm.errors?.['passwordMismatch']" class="text-red-600">
+      As senhas informadas não coincidem.
+    </small>
+
+    <div class="mt-2 flex justify-end gap-2">
+      <button
+        type="button"
+        pButton
+        label="Cancelar"
+        severity="secondary"
+        [text]="true"
+        [disabled]="isSaving"
+        (click)="closeDialog()"
+      ></button>
+
+      <button
+        type="submit"
+        pButton
+        [label]="submitLabel"
+        icon="pi pi-check"
+        severity="secondary"
+        [disabled]="isSaving"
+      ></button>
+    </div>
+  </form>
+</p-dialog>

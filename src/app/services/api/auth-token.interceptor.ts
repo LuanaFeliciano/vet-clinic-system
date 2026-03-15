@@ -3,7 +3,12 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import { API_ENDPOINTS } from './api.config';
 import { LoginService } from '../auth/login.service';
 
-const PUBLIC_ENDPOINTS = [API_ENDPOINTS.login, API_ENDPOINTS.register];
+const PUBLIC_ENDPOINTS = [
+  API_ENDPOINTS.login,
+  API_ENDPOINTS.register,
+  API_ENDPOINTS.forgotPassword,
+  API_ENDPOINTS.resetPassword
+];
 
 export const authTokenInterceptor: HttpInterceptorFn = (request, next) => {
   const loginService = inject(LoginService);

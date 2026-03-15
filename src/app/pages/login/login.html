@@ -6,14 +6,19 @@
           <i class="pi pi-heart-fill text-xl"></i>
         </div>
 
-        <h2 class="text-3xl font-display font-bold text-gray-900">Acesse sua conta</h2>
-        <p class="mt-2 text-sm text-gray-500">Entre para continuar no sistema da clínica.</p>
+        <h2 class="text-3xl font-display font-bold text-gray-900">{{ title }}</h2>
+        <p class="mt-2 text-sm text-gray-500">{{ subtitle }}</p>
       </div>
 
-      <form [formGroup]="loginForm" class="space-y-5" (ngSubmit)="submitForm()" @stepAnimation>
+      <form *ngIf="currentView === 'login'" [formGroup]="loginForm" class="space-y-5" (ngSubmit)="submitForm()" @stepAnimation>
         <div *ngIf="verifiedMessage" class="alert alert-success text-white rounded-lg shadow-md bg-green-600 border-green-700">
           <i class="pi pi-check-circle text-xl"></i>
           <span>{{ verifiedMessage }}</span>
+        </div>
+
+        <div *ngIf="loginSuccessMessage" class="alert alert-success text-white rounded-lg shadow-md bg-green-600 border-green-700">
+          <i class="pi pi-check-circle text-xl"></i>
+          <span>{{ loginSuccessMessage }}</span>
         </div>
 
         <div *ngIf="apiErrorMessage" class="alert alert-error text-white rounded-lg">
@@ -21,13 +26,20 @@
           <span>{{ apiErrorMessage }}</span>
         </div>
 
-        <app-input-field label="Email" type="email" [control]="getControl('email')" placeholder="voce@clinica.com"
-          [errorMessage]="getFieldErrorMessage('email', 'Insira um email válido')">
+        <app-input-field label="Email" type="email" [control]="getLoginControl('email')" placeholder="voce@clinica.com"
+          [errorMessage]="getFieldErrorMessage(loginForm, 'email', 'Insira um email válido')">
         </app-input-field>
 
-        <app-input-field label="Senha" type="password" [control]="getControl('password')" placeholder="••••••••"
-          [errorMessage]="getFieldErrorMessage('password', 'Mínimo 6 caracteres')">
+        <app-input-field label="Senha" type="password" [control]="getLoginControl('password')" placeholder="••••••••"
+          [errorMessage]="getFieldErrorMessage(loginForm, 'password', 'Mínimo 6 caracteres')">
         </app-input-field>
+
+        <div class="flex items-center justify-between text-sm">
+          <button type="button" class="text-primary hover:text-orange-600 transition-colors" (click)="switchView('forgot')">
+            Esqueceu a senha?
+          </button>
+        </div>
+
         <div class="pt-2">
           <button type="submit" [disabled]="(loginForm.invalid || isSubmitting)"
             class="btn btn-primary w-full text-white font-bold text-lg h-12 shadow-lg shadow-orange-200/50 hover:shadow-orange-300/50 transition-all">
@@ -36,10 +48,70 @@
         </div>
       </form>
 
+      <form *ngIf="currentView === 'forgot'" [formGroup]="forgotForm" class="space-y-5" (ngSubmit)="submitForgotForm()" @stepAnimation>
+        <div *ngIf="forgotSuccessMessage" class="alert alert-success text-white rounded-lg shadow-md bg-green-600 border-green-700">
+          <i class="pi pi-check-circle text-xl"></i>
+          <span>{{ forgotSuccessMessage }}</span>
+        </div>
+
+        <div *ngIf="forgotErrorMessage" class="alert alert-error text-white rounded-lg">
+          <i class="pi pi-times-circle"></i>
+          <span>{{ forgotErrorMessage }}</span>
+        </div>
+
+        <app-input-field label="Email" type="email" [control]="getForgotControl('email')" placeholder="voce@clinica.com"
+          [errorMessage]="getFieldErrorMessage(forgotForm, 'email', 'Insira um email válido')">
+        </app-input-field>
+
+        <div class="pt-2">
+          <button type="submit" [disabled]="(forgotForm.invalid || isSubmittingForgot)"
+            class="btn btn-primary w-full text-white font-bold text-lg h-12 shadow-lg shadow-orange-200/50 hover:shadow-orange-300/50 transition-all">
+            {{ isSubmittingForgot ? 'Enviando...' : 'Enviar link' }}
+          </button>
+        </div>
+      </form>
+
+      <form *ngIf="currentView === 'reset'" [formGroup]="resetForm" class="space-y-5" (ngSubmit)="submitResetForm()" @stepAnimation>
+        <div *ngIf="resetErrorMessage" class="alert alert-error text-white rounded-lg">
+          <i class="pi pi-times-circle"></i>
+          <span>{{ resetErrorMessage }}</span>
+        </div>
+
+        <app-input-field *ngIf="showResetTokenField" label="Token" type="text" [control]="getResetControl('token')" placeholder="Cole o token recebido"
+          [errorMessage]="getFieldErrorMessage(resetForm, 'token', 'Informe o token de redefinição')">
+        </app-input-field>
+
+        <app-input-field label="Email" type="email" [control]="getResetControl('email')" placeholder="voce@clinica.com"
+          [errorMessage]="getFieldErrorMessage(resetForm, 'email', 'Insira um email válido')">
+        </app-input-field>
+
+        <app-input-field label="Nova senha" type="password" [control]="getResetControl('password')" placeholder="••••••••"
+          [errorMessage]="getFieldErrorMessage(resetForm, 'password', 'Mínimo 6 caracteres')">
+        </app-input-field>
+
+        <app-input-field label="Confirmar nova senha" type="password" [control]="getResetControl('confirmPassword')" placeholder="••••••••"
+          [errorMessage]="getFieldErrorMessage(resetForm, 'confirmPassword', 'Confirme a nova senha')">
+        </app-input-field>
+
+        <div class="pt-2">
+          <button type="submit" [disabled]="(resetForm.invalid || isSubmittingReset)"
+            class="btn btn-primary w-full text-white font-bold text-lg h-12 shadow-lg shadow-orange-200/50 hover:shadow-orange-300/50 transition-all">
+            {{ isSubmittingReset ? 'Redefinindo...' : 'Redefinir senha' }}
+          </button>
+        </div>
+      </form>
+
       <div class="mt-8 text-center text-sm" @stepAnimation>
-        <span class="text-gray-500">Ainda não tem conta?</span>
-        <a routerLink="/register" class="font-medium text-primary hover:text-orange-600 ml-1 transition-colors">Criar
-          conta</a>
+        <ng-container *ngIf="currentView === 'login'; else backToLogin">
+          <span class="text-gray-500">Ainda não tem conta?</span>
+          <a routerLink="/register" class="font-medium text-primary hover:text-orange-600 ml-1 transition-colors">Criar
+            conta</a>
+        </ng-container>
+        <ng-template #backToLogin>
+          <button type="button" class="font-medium text-primary hover:text-orange-600 transition-colors" (click)="switchView('login')">
+            Voltar ao login
+          </button>
+        </ng-template>
       </div>
     </div>
   </div>

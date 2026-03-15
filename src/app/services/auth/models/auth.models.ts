@@ -5,6 +5,17 @@ export interface LoginBody {
   password: string;
 }
 
+export interface ForgotPasswordBody {
+  email: string;
+}
+
+export interface ResetPasswordBody {
+  token: string;
+  email: string;
+  password: string;
+  password_confirmation: string;
+}
+
 export interface UserClinic {
   id: string;
   name: string;
